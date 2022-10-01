@@ -48,4 +48,5 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Build ({sha}) {msg}"
+          MESSAGE: ${{ env.BRANCH_NAME == 'main' && 'Prod Build ({sha}) {msg}' || 'Dev Build ({sha}) {msg}' }}
+          CLEAR_GLOBS_FILE: ${{ env.BRANCH_NAME == 'main' && '.github/.clear-prod-files' || '.github/.clear-dev-files' }}
