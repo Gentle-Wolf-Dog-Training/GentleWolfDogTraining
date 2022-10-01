@@ -5,6 +5,7 @@ on:
     branches: [ "main", "dev" ]
 env:
   CI: ""
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
 
 jobs:
   build:
@@ -37,7 +38,7 @@ jobs:
           path: .
       - run: mkdir ./build/prod
       - run: mkdir ./build/dev
-      - run: tar -xzf build.tar.gz -C ./build/${{ ${GITHUB_REF##*/} == 'main' && 'prod' || 'dev' }}
+      - run: tar -xzf build.tar.gz -C ./build/${{ env.BRANCH_NAME == 'main' && 'prod' || 'dev' }}
       - run: rm build.tar.gz
       - name: Push
         uses: s0/git-publish-subdir-action@develop
