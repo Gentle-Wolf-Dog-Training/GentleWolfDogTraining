@@ -30,7 +30,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     outputPath: (url, resourcePath, context) => {
-                        return `${path.relative(context, resourcePath).match(/src\\([^\\]*)\\.*\.scss$/)[1]}/${url}`;
+                        return `${path.relative(context, resourcePath).match(/src[/\\\\]([^/\\\\]*)[/\\\\].*\.scss$/)[1]}/${url}`;
                     },
                     name: '[name].min.css'
                 }
