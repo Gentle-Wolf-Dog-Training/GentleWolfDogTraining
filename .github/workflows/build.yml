@@ -39,7 +39,7 @@ jobs:
       - run: mkdir ./build
       - run: mkdir ./build/prod
       - run: mkdir ./build/dev
-      - run: tar -xzf build.tar.gz -C ./build/${{ env.BRANCH_NAME == 'main' && 'prod' || 'dev' }}
+      - run: tar -xzf build.tar.gz -C ./build/${{ env.BRANCH_NAME == 'main' && 'prod' || 'dev' }} --strip-components=1
       - run: rm build.tar.gz
       - name: Push
         uses: s0/git-publish-subdir-action@develop
