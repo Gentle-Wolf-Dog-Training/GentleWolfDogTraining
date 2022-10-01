@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+env:
+  CI: ""
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    - run: yarn install
+    - run: yarn build
+    - run: tar -czf build.tar.gz build
+    - uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: build.tar.gz
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    name: "Deploy"
+    if: github.event_name != 'pull_request' && github.repository == 'Gentle-Wolf-Dog-Training/GentleWolfDogTraining' 
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v1
+        with:
+          name: build
+          path: .
+      - run: mkdir ./build/prod
+      - run: mkdir ./build/dev
+      - run: tar -xzf build.tar.gz -C ./build/${{ ${GITHUB_REF##*/} == 'main' && 'prod' || 'dev' }}
+      - run: rm build.tar.gz
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build ({sha}) {msg}"

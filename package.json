@@ -1,0 +1,45 @@
+{
+  "name": "gentle-wolf-dog-training",
+  "version": "1.0.0",
+  "description": "Gentle Wolf Dog Training custom code",
+  "repository": "https://github.com/Zeboot/gentle-wolf-dog-training",
+  "license": "MIT",
+  "keywords": [],
+  "scripts": {
+    "build": "webpack --mode production",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"src/**/*.ts\" --write",
+    "fix:lint": "eslint src --ext .ts --fix",
+    "watch:build": "tsc -p tsconfig.json -w"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^3.1.0",
+    "glob": "^8.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.0.2",
+    "ts-loader": "^9.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "files": [
+    "build"
+  ],
+  "prettier": {
+    "singleQuote": true
+  }
+}
