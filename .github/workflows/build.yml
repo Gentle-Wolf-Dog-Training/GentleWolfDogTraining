@@ -36,6 +36,7 @@ jobs:
         with:
           name: build
           path: .
+      - run: mkdir ./build
       - run: mkdir ./build/prod
       - run: mkdir ./build/dev
       - run: tar -xzf build.tar.gz -C ./build/${{ env.BRANCH_NAME == 'main' && 'prod' || 'dev' }}
