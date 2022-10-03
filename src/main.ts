@@ -1,4 +1,4 @@
-((target: Window) => {
+function inject(target: Window){
     const STACK_TRACE_SPLIT_PATTERN = /(?:Error)?\n(?:\s*at\s+)?/;
     const STACK_TRACE_ROW_PATTERN1 = /^.+?\s\((.+?):\d+:\d+\)$/;
     const STACK_TRACE_ROW_PATTERN2 = /^(?:.*?@)?(.*?):\d+(?::\d+)?$/;
@@ -19,7 +19,6 @@
         }
         return undefined;
     };
-
     const params = getFileParams();
     if (params && params.has("script")) {
         const scr = params.get("script");
@@ -52,4 +51,13 @@
         target.document.body.appendChild(cssEle);
         target.document.body.appendChild(scriptEle);
     }
-})(window.parent || window); //navigate to parent if called within an iframe
+}
+
+((target: Window) => {
+   inject(target.parent || target) //navigate to parent if called within an iframe
+   var frame = target.parent.document.getElementById(target.frameElement.getAttribute("ID"));
+    var widget = frame && frame.closest(".widget-html") as HTMLElement;
+    if(target && target.parent.location.host === "gentlewolfdogtraining.com"){
+        widget.style.display = 'none';
+    }
+})(window);
