@@ -1,15 +1,17 @@
-.widget-appointments [data-ux="GridCell"] > [data-ux="Block"]:first-of-type {
-    [data-aid^="SERVICE_LIST_ITEM_SERVICE_DESCRIPTION"] {
-      white-space: pre-line;
-  
-      &:first-line {
-        font-weight: bold;
-      }
-    }
-  
-    [data-aid="SERVICE_INFO_DESCRIPTION"] [data-ux="Text"] {
-      &:first-line, [data-aid="TRUNCATE_DESCRIPTION"]:first-line {
-        font-weight: bold;
-      }
+.widget-appointments [data-ux="GridCell"] > [data-ux="Block"] {
+    &:first-of-type, &:nth-of-type(2) {
+        [data-aid^="SERVICE_LIST_ITEM_SERVICE_DESCRIPTION"] {
+          white-space: pre-line;
+      
+          &:first-line {
+            font-weight: bold;
+          }
+        }
+      
+        [data-aid="SERVICE_INFO_DESCRIPTION"] [data-ux="Text"] {
+          &:first-line, [data-aid="TRUNCATE_DESCRIPTION"]:first-line {
+            font-weight: bold;
+          }
+        }
     }
   }
